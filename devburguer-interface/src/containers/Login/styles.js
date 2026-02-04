@@ -22,13 +22,19 @@ align-items: center;
 justify-content: center;
  
 img {
-    width: 60%;
+    width: 80%;
     height: auto;
 }
 `;
 
 
-export const RightContainer = styled.div``;
+export const RightContainer = styled.div`
+display: flex;
+justify-content: center;
+align-items: center;
+flex-direction: column;
+
+`;
 
 
 export const Title = styled.h2``;
