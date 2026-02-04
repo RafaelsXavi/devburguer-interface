@@ -1,4 +1,4 @@
-import { Container, LeftContainer, RightContainer, Title, Form, InputContainer, Link } from "./styles";
+import { Container, LeftContainer, RightContainer, Title, Form, InputContainer, Link, Button } from "./styles";
 import Logo from "../../assets/Logo.svg";
 
 export function Login() {
@@ -20,8 +20,8 @@ export function Login() {
                         <label>Senha</label>
                         <input type="password" placeholder="Senha" />
                     </InputContainer>
-                    <Link href="#">Esqueci minha senha</Link>
-                    <button type="submit">Entrar</button>
+                    
+                    <Button type="submit">Entrar</Button>
                 </Form>
                 <Link href="#">Não possui conta? Clique aqui</Link>
             </RightContainer>

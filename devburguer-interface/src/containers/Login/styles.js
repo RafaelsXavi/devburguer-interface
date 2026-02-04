@@ -1,10 +1,31 @@
 import styled from 'styled-components';
+import Background from '../../assets/background.svg';
+
+export const Container = styled.div`
+  display: flex;
+    height: 100vh;
+    width: 100vw;
+`; 
 
 
-export const Container = styled.div``; 
+export const LeftContainer = styled.div`
+background: url('${Background}');
+background-size: cover;
+background-position: center;
 
 
-export const LeftContainer = styled.div``;
+height: 100%;
+width: 100%;
+
+display: flex;
+align-items: center;
+justify-content: center;
+ 
+img {
+    width: 60%;
+    height: auto;
+}
+`;
 
 
 export const RightContainer = styled.div``;
