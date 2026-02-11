@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import BackgroundLogo from '../../assets/background-logo.svg';
 import Background from '../../assets/background.svg';
 
 export const Container = styled.div`
@@ -9,13 +10,14 @@ export const Container = styled.div`
 
 
 export const LeftContainer = styled.div`
-background: url('${Background}');
+background: url('${BackgroundLogo}');
 background-size: cover;
 background-position: center;
 
 
 height: 100%;
 width: 100%;
+max-width: 50%;
 
 display: flex;
 align-items: center;
@@ -34,10 +36,17 @@ justify-content: center;
 align-items: center;
 flex-direction: column;
 
+height: 100%;
+width: 100%;
+max-width: 50%;
+
+background: url('${Background}');
 `;
 
 
-export const Title = styled.h2``;
+export const Title = styled.h2`
+
+`;
 
 export const Form = styled.form``;
 
