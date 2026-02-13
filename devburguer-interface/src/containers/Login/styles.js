@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 import BackgroundLogo from '../../assets/background-logo.svg';
 import Background from '../../assets/background.svg';
+import logo from '../../assets/Logo.svg';
 
 export const Container = styled.div`
   display: flex;
@@ -10,7 +11,7 @@ export const Container = styled.div`
 
 
 export const LeftContainer = styled.div`
-background: url('${BackgroundLogo}');
+background: url('${Logo}');
 background-size: cover;
 background-position: center;
 
@@ -41,10 +42,16 @@ width: 100%;
 max-width: 50%;
 
 background: url('${Background}');
+background-color: #1e1e1e;
+
 `;
 
 
 export const Title = styled.h2`
+font-family: 'road rage', sans-serif;
+font-size: 24px;
+color: #fff;
+
 
 `;
 

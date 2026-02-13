@@ -1,5 +1,8 @@
 import { Container, LeftContainer, RightContainer, Title, Form, InputContainer, Link, Button } from "./styles";
-import Logo from "../../assets/Logo.svg";
+
+import Fundoescuro from "../../assets/backgroundlimpo.svg";
+
+import background from '../../assets/backgroundlimpo.svg';
 
 export function Login() {
     return (
@@ -7,7 +10,7 @@ export function Login() {
 
         <Container>
             <LeftContainer>
-                <img src={Logo} alt="logo-devburguer" />
+                <img src={Fundoescuro} alt="background-devburguer" />
             </LeftContainer>
             <RightContainer>
                 <Title>Olá, seja bem vindo ao <span>Dev Burguer !.</span>
