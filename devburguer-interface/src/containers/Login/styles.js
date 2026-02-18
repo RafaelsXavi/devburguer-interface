@@ -46,6 +46,9 @@ p {
 font-size: 16px;
 font-weight: 500;
 }
+a {
+  text-decoration: underline;
+}
 
 `;
 
@@ -54,6 +57,7 @@ export const Title = styled.h2`
 font-family: 'Road Rage', sans-serif;
 font-size: 40px;
 color: #fff;
+
 
 span {
     color: #9758a6;
@@ -96,12 +100,17 @@ label {
   color: #fff;
 }
 
+p {
+  font-size: 14px;
+  line-height: 80%;
+  color: #cf3057;
+  font-weight: 500;
+  height: 10px;
+  
+}
+
 `;
 
-export const Button = styled.button`
-
-
-`;
 
 export const Link = styled.a`
   color: #007bff;

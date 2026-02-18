@@ -1,19 +1,20 @@
 import { createGlobalStyle } from "styled-components";
 
-export const GlobalStyle = createGlobalStyle`
+const globalStyles = createGlobalStyle`
     * {
         margin: 0;
         padding: 0;
         box-sizing: border-box;
         outline: none;
-        font-family: 'Roboto', sans-serif;
+        font-family: 'Poppins', sans-serif;
+        font-weight: 400;
+        font-style: normal;
     }
     
-    button {
+    button, a {
         cursor: pointer;
     }
-    body {
-        background-color: #f5f5f5;
-        color: #333;    
-    }
+
 `;
+
+export default globalStyles;
