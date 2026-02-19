@@ -80,11 +80,11 @@ error: "Erro ao realizar login. Verifique suas credenciais e tente novamente.",
                         <p>{errors.password?.message}</p>
                     </InputContainer>
 
-                    <Button type="submit">Entrar</Button>
+                    <Button type="submit">Entrar</Button> 
                 </Form>
 
                 <p>
-                    Não possui conta? <Link href="#"> Clique aqui</Link>
+                    Não possui conta? <Link href="/cadastro"> Clique aqui</Link>
                 </p>
 
             </RightContainer>

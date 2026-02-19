@@ -36,29 +36,30 @@ export function Register() {
         });
 
     const onSubmit = async (data) => {
-        const response = await toast.promise(
 
-            api.post("/users", {
-                name: data.name,
-                email: data.email,
-                password: data.password,
-            }),
+        const { status } = await toast.promise(
+
+            api.post("/users",
+                {
+                    name: data.name,
+                    email: data.email,
+                    password: data.password,
+                },
+                {
+                    validateStatus: (status) => {
+                        return status === 201 || status === 400;
+                    }
+                }
+            ),
             {
                 pending: "Verificando suas credenciais...",
                 success: "Cadastro realizado com sucesso!",
                 error: "Erro ao realizar o cadastro. Tente novamente.",
 
             }
-
-
         )
-
-
     };
-
     return (
-
-
         <Container>
 
             <LeftContainer>
@@ -101,7 +102,7 @@ export function Register() {
                 </Form>
 
                 <p>
-                    Já possui conta? <Link href="#"> Clique aqui</Link>
+                    Já possui conta? <Link href="/login"> Clique aqui</Link>
                 </p>
 
             </RightContainer>
