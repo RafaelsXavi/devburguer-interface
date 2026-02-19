@@ -15,12 +15,16 @@ import { api } from "../../services/api";
 
 import { toast } from "react-toastify";
 
-export function Login() {
+export function Register() {
 
-    const schema = yup.object().shape({
-        email: yup.string().email("Digite um e-mail válido").required("Email é obrigatório"),
-        password: yup.string().min(6, "A senha deve conter no mínimo 6 caracteres").required("Senha é obrigatória"),
-    })
+    const schema = yup
+        .object()
+        .shape({
+            name: yup.string().required("Nome é obrigatório"),
+            email: yup.string().email("Digite um e-mail válido").required("Email é obrigatório"),
+            password: yup.string().min(6, "A senha deve conter no mínimo 6 caracteres").required("Senha é obrigatória"),
+            confirmPassword: yup.string().oneOf([yup.ref("password"), null], "As senhas devem ser iguais").required(),
+        })
         .required();
 
     const {
@@ -34,14 +38,15 @@ export function Login() {
     const onSubmit = async (data) => {
         const response = await toast.promise(
 
-            api.post("/sessions", {
+            api.post("/users", {
+                name: data.name,
                 email: data.email,
                 password: data.password,
             }),
             {
-pending: "Verificando suas credenciais...",
-success: "Login realizado com sucesso!",
-error: "Erro ao realizar login. Verifique suas credenciais e tente novamente.",
+                pending: "Verificando suas credenciais...",
+                success: "Cadastro realizado com sucesso!",
+                error: "Erro ao realizar o cadastro. Tente novamente.",
 
             }
 
@@ -62,12 +67,18 @@ error: "Erro ao realizar login. Verifique suas credenciais e tente novamente.",
 
             <RightContainer>
 
-                <Title>Olá, seja bem vindo ao <span>Dev Burguer !.</span>
-                    <br />
-                    Acesse com seu <span>Login e senha.</span>
+                <Title>
+                    Crie sua conta no <span>Dev Burguer !.</span>
                 </Title>
 
                 <Form onSubmit={handleSubmit((onSubmit))}>
+
+                    <InputContainer>
+                        <label>Nome Completo</label>
+                        <input type="text" placeholder="Nome Completo" {...register("name")} />
+                        <p>{errors.name?.message}</p>
+                    </InputContainer>
+
                     <InputContainer>
                         <label>Email</label>
                         <input type="email" placeholder="Email" {...register("email")} />
@@ -80,11 +91,17 @@ error: "Erro ao realizar login. Verifique suas credenciais e tente novamente.",
                         <p>{errors.password?.message}</p>
                     </InputContainer>
 
+                    <InputContainer>
+                        <label>Confirmar Senha</label>
+                        <input type="password" placeholder="Confirmar Senha" {...register("confirmPassword")} />
+                        <p>{errors.confirmPassword?.message}</p>
+                    </InputContainer>
+
                     <Button type="submit">Entrar</Button>
                 </Form>
 
                 <p>
-                    Não possui conta? <Link href="#"> Clique aqui</Link>
+                    Já possui conta? <Link href="#"> Clique aqui</Link>
                 </p>
 
             </RightContainer>
