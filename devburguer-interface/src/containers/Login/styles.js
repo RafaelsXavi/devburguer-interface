@@ -2,6 +2,8 @@ import styled from 'styled-components';
 import Background from '../../assets/background.svg';
 import logo from '../../assets/Logo.svg';
 
+import { Link as RouterLink } from 'react-router-dom';
+
 export const Container = styled.div`
   display: flex;
   height: 100vh;
@@ -11,22 +13,36 @@ export const Container = styled.div`
 
 
 export const LeftContainer = styled.div`
-background: url('${logo}');
-background-size: cover;
-background-position: center;
-
-
 height: 100%;
 width: 50%;
 
 display: flex;
 align-items: center;
 justify-content: center;
- 
+position: relative;
+
+.background-image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: 1;
+}
+
+.logo-image {
+    position: relative;
+    z-index: 2;
+    width: 60%;
+    max-width: 400px;
+}
+
 img {
     width: 100%;
     height: auto;
 }
+
 `;
 
 
@@ -40,6 +56,7 @@ height: 100%;
 width: 50%;
 
 background: url('${Background}');
+
 background-color: #1e1e1e;
 p {
   color: #fff;
@@ -112,7 +129,7 @@ p {
 `;
 
 
-export const Link = styled.a`
+export const Link = styled(RouterLink)`
   color: #007bff;
     text-decoration: none;
     margin-top: 10px;

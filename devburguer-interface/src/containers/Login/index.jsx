@@ -3,19 +3,29 @@ import { useForm } from "react-hook-form";
 import * as yup from "yup";
 
 
-
-
 import { Container, LeftContainer, RightContainer, Title, Form, InputContainer, Link } from "./styles";
 
 import { Button } from "../../components/Button";
 
-import backgroundlogo from "../../assets/background-logo.svg";
+import backgroundlimpo from "../../assets/backgroundlimpo.svg";
+
+import logo from "../../assets/Logo.svg";
 
 import { api } from "../../services/api";
 
 import { toast } from "react-toastify";
 
-export function Login() {
+import { useNavigate } from "react-router-dom";
+
+
+        export function Login() {
+
+
+
+
+
+
+     const navigate = useNavigate();
 
     const schema = yup.object().shape({
         email: yup.string().email("Digite um e-mail válido").required("Email é obrigatório"),
@@ -32,23 +42,31 @@ export function Login() {
         });
 
     const onSubmit = async (data) => {
-        const response = await toast.promise(
+        try {
+            const { status } = await api.post(
+                "/sessions",
+                {
+                    email: data.email,
+                    password: data.password,
+                },
+                {
+                    validateStatus: (status) => true,
+                },
+            );
 
-            api.post("/sessions", {
-                email: data.email,
-                password: data.password,
-            }),
-            {
-pending: "Verificando suas credenciais...",
-success: "Login realizado com sucesso!",
-error: "Erro ao realizar login. Verifique suas credenciais e tente novamente.",
-
+            if (status === 200) {
+                toast.success("Login realizado com sucesso!");
+                setTimeout(() => {
+                    navigate("/");
+                }, 2000);
+            } else if (status === 401) {
+                toast.error("Email ou senha incorretos.");
+            } else {
+                throw new Error();
             }
-
-
-        )
-
-
+        } catch (error) {
+            toast.error("Erro ao realizar login. Verifique suas credenciais e tente novamente.");
+        }
     };
 
     return (
@@ -57,7 +75,8 @@ error: "Erro ao realizar login. Verifique suas credenciais e tente novamente.",
         <Container>
 
             <LeftContainer>
-                <img src={backgroundlogo} alt="background-devburguer" />
+                <img src={backgroundlimpo} alt="background-devburguer" className="background-image" />
+                <img src={logo} alt="logo-devburguer" className="logo-image" />
             </LeftContainer>
 
             <RightContainer>
@@ -84,7 +103,7 @@ error: "Erro ao realizar login. Verifique suas credenciais e tente novamente.",
                 </Form>
 
                 <p>
-                    Não possui conta? <Link href="/cadastro"> Clique aqui</Link>
+                    Não possui conta? <Link to='/cadastro' > Clique aqui</Link>
                 </p>
 
             </RightContainer>

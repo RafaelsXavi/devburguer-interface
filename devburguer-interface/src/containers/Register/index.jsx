@@ -3,20 +3,22 @@ import { useForm } from "react-hook-form";
 import * as yup from "yup";
 
 
-
+import { useNavigate } from "react-router-dom";
 
 import { Container, LeftContainer, RightContainer, Title, Form, InputContainer, Link } from "./styles";
 
 import { Button } from "../../components/Button";
 
-import backgroundlogo from "../../assets/background-logo.svg";
+import backgroundlimpo from "../../assets/backgroundlimpo.svg";
+
+import logo from "../../assets/Logo.svg";
 
 import { api } from "../../services/api";
 
 import { toast } from "react-toastify";
 
 export function Register() {
-
+const navigate = useNavigate();
     const schema = yup
         .object()
         .shape({
@@ -36,34 +38,46 @@ export function Register() {
         });
 
     const onSubmit = async (data) => {
+ try { const { status } = await api.post(
 
-        const { status } = await toast.promise(
+            '/users',
 
-            api.post("/users",
-                {
-                    name: data.name,
-                    email: data.email,
-                    password: data.password,
-                },
-                {
-                    validateStatus: (status) => {
-                        return status === 201 || status === 400;
-                    }
-                }
-            ),
             {
-                pending: "Verificando suas credenciais...",
-                success: "Cadastro realizado com sucesso!",
-                error: "Erro ao realizar o cadastro. Tente novamente.",
+                name: data.name,
+                email: data.email,
+                password: data.password,
+            },
 
-            }
-        )
-    };
+            {
+                validateStatus: (status) => true,
+            },
+        );
+if (status === 200 || status === 201) {
+setTimeout(() => {
+navigate("/login");
+}, 2000);
+
+
+            toast.success("Cadastro realizado com sucesso!");
+        } else if (status === 409) {
+            toast.error("Erro ao realizar cadastro. Verifique os dados e tente novamente.");
+} else {throw new Error(); } 
+
+}
+
+catch (error) {
+    toast.error("Erro ao realizar cadastro. Verifique os dados e tente novamente.");
+}
+       
+
+};
+
     return (
         <Container>
 
             <LeftContainer>
-                <img src={backgroundlogo} alt="background-devburguer" />
+                <img src={backgroundlimpo} alt="background-devburguer" className="background-image" />
+                <img src={logo} alt="logo-devburguer" className="logo-image" />
             </LeftContainer>
 
             <RightContainer>
@@ -102,7 +116,7 @@ export function Register() {
                 </Form>
 
                 <p>
-                    Já possui conta? <Link href="/login"> Clique aqui</Link>
+                    Já possui conta? <Link to="/login"> Clique aqui</Link>
                 </p>
 
             </RightContainer>

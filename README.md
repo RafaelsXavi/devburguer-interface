@@ -1,78 +1,88 @@
-# DevBurguer Interface
+# 🍔 DevBurguer Interface
 
-A React-based user interface for the DevBurguer application, built with modern web technologies.
+Interface de usuário moderna para o Delivery DevBurguer, desenvolvida com tecnologias web recentes.
 
-## Technologies Used
+## 🚀 Tecnologias
 
-- **React** (v19.2.0) - JavaScript library for building user interfaces
-- **Vite** (v7.2.4) - Fast build tool and development server
-- **Styled Components** (v6.3.8) - CSS-in-JS library for styling
-- **ESLint** - Code linting tool
+- **React** - Biblioteca JavaScript para interfaces de usuário
+- **Vite** - Ferramenta de build e servidor de desenvolvimento rápido
+- **Styled Components** - Biblioteca CSS-in-JS para estilização
+- **React Hook Form** - Gerenciamento de formulários
+- **React Router** - Roteamento de páginas
+- **Yup** - Validação de esquemas
 
-## Prerequisites
+## ✨ Funcionalidades
 
-- Node.js (v14 or higher recommended)
-- Yarn or npm package manager
+- Tela de Login com validação de dados
+- Tela de Cadastro de novos usuários
+- Página Home com carrossel de categorias e produtos
+- Design responsivo e moderno
+- Integração com API REST
 
-## Installation
+## 📋 Pré-requisitos
 
-1. Clone the repository:
-   ```bash
-   git clone <repository-url>
-   cd devburguer-interface
-   ```
+- Node.js (v14 ou superior)
+- Yarn ou npm
 
-2. Install dependencies:
-   ```bash
-   yarn install
-   # or
-   npm install
-   ```
+## 🔧 Instalação
 
-## Available Scripts
+```
+bash
+# Clone o repositório
+git clone <repository-url>
 
-- `yarn dev` or `npm run dev` - Start the development server
-- `yarn build` or `npm run build` - Build the app for production
-- `yarn lint` or `npm run lint` - Run ESLint to check code quality
-- `yarn preview` or `npm run preview` - Preview the production build locally
+# Entre no diretório
+cd devburguer-interface
 
-## Project Structure
+# Instale as dependências
+yarn install
+# ou
+npm install
+```
+
+## ▶️ Scripts Disponíveis
+
+- `yarn dev` - Iniciar servidor de desenvolvimento
+- `yarn build` - Build para produção
+- `yarn lint` - Verificar qualidade do código
+- `yarn preview` - Pré-visualizar build de produção
+
+## 📁 Estrutura do Projeto
 
 ```
 src/
-├── assets/          # Static assets (images, icons)
-├── components/      # Reusable UI components
-├── containers/      # Page-level components (e.g., Login)
-├── hooks/           # Custom React hooks
-├── routes/          # Application routing
-├── services/        # API services and utilities
-├── styles/          # Global styles and theme
-└── utils/           # Utility functions
+├── assets/          # Arquivos estáticos (imagens, ícones)
+├── components/      # Componentes reutilizáveis
+├── containers/      # Componentes de página
+├── hooks/          # Hooks customizados do React
+├── routes/         # Rotas da aplicação
+├── services/       # Serviços de API
+├── styles/         # Estilos globais
+└── utils/          # Funções utilitárias
 ```
 
-## Development
+## 🎨 Design
 
-1. Start the development server:
-   ```bash
-   yarn dev
-   ```
+Interface moderna com:
+- Logo personalizado em destaque
+- Background limpo e profissional
+- Telas de Login e Cadastro com visual的一致
+- Componentes de carrossel para categorias e produtos
 
-2. Open [http://localhost:5173](http://localhost:5173) in your browser.
+## 📱 Demonstração
 
-## Building for Production
-
-```bash
-yarn build
+Inicie o servidor de desenvolvimento:
+```
+bash
+yarn dev
 ```
 
-The built files will be in the `dist/` directory.
+Acesse: http://localhost:5173
 
-## Contributing
+## 📝 Licença
 
-1. Follow the existing code style
-2. Run `yarn lint` before committing
-3. Ensure all tests pass (if applicable)
+Este projeto é privado e proprietário.
 
-## License
+---
 
-This project is private and proprietary.
+Desenvolvido com 💜 pela equipe DevBurguer
