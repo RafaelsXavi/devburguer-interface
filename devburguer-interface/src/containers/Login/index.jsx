@@ -18,14 +18,14 @@ import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 
 
-        export function Login() {
+export function Login() {
 
 
 
 
 
 
-     const navigate = useNavigate();
+    const navigate = useNavigate();
 
     const schema = yup.object().shape({
         email: yup.string().email("Digite um e-mail válido").required("Email é obrigatório"),
@@ -42,32 +42,29 @@ import { useNavigate } from "react-router-dom";
         });
 
     const onSubmit = async (data) => {
-        try {
-            const { status } = await api.post(
-                "/sessions",
-                {
-                    email: data.email,
-                    password: data.password,
-                },
-                {
-                    validateStatus: (status) => true,
-                },
-            );
+        const { data: { token } } = await toast.promise(
+            api.post('/sessions', {
+                email: data.email,
+                password: data.password
+            }),
 
-            if (status === 200) {
-                toast.success("Login realizado com sucesso!");
-                setTimeout(() => {
-                    navigate("/");
-                }, 2000);
-            } else if (status === 401) {
-                toast.error("Email ou senha incorretos.");
-            } else {
-                throw new Error();
-            }
-        } catch (error) {
-            toast.error("Erro ao realizar login. Verifique suas credenciais e tente novamente.");
-        }
+            {
+                pending: 'Verificando seus dados',
+                success: {
+                    render() {
+                        setTimeout(() => {
+                            navigate('/');
+                        }, 2000);
+                        return 'Seja Bem-vindo(a)'
+                    },
+                },
+            },
+        );
+
+        localStorage.setItem('token', token)
+
     };
+
 
     return (
 
@@ -99,7 +96,7 @@ import { useNavigate } from "react-router-dom";
                         <p>{errors.password?.message}</p>
                     </InputContainer>
 
-                    <Button type="submit">Entrar</Button> 
+                    <Button type="submit">Entrar</Button>
                 </Form>
 
                 <p>
