@@ -22,6 +22,7 @@ export const Banner = styled.div`
 `;
 
 export const Content = styled.div`
+
 `;
 
 export const Container = styled.section`
@@ -31,4 +32,4 @@ background: linear-gradient(
 ),
 url('${Background}');
 height: auto;
-`
+`;

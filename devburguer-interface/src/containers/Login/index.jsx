@@ -42,26 +42,31 @@ export function Login() {
         });
 
     const onSubmit = async (data) => {
-        const { data: { token } } = await toast.promise(
-            api.post('/sessions', {
-                email: data.email,
-                password: data.password
-            }),
+        try {
+            const { data: response } = await toast.promise(
+                api.post('/sessions', {
+                    email: data.email,
+                    password: data.password
+                }),
 
-            {
-                pending: 'Verificando seus dados',
-                success: {
-                    render() {
-                        setTimeout(() => {
-                            navigate('/');
-                        }, 2000);
-                        return 'Seja Bem-vindo(a)'
+                {
+                    pending: 'Verificando seus dados',
+                    success: {
+                        render() {
+                            setTimeout(() => {
+                                navigate('/');
+                            }, 2000);
+                            return 'Seja Bem-vindo(a)'
+                        },
                     },
+                    error: 'Email ou senha incorretos'
                 },
-            },
-        );
+            );
 
-        localStorage.setItem('token', token)
+            localStorage.setItem('token', response.token)
+        } catch (error) {
+            console.error('Login error:', error);
+        }
 
     };
 

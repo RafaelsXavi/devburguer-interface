@@ -1,24 +1,40 @@
 import { useState, useEffect } from 'react';
 import { api } from "../../services/api";
+
+
 import Carousel from 'react-multi-carousel';
-import 'react-multi-carousel/lib/styles.css'
+import 'react-multi-carousel/lib/styles.css';
+import { formatPrice } from '../../utils/formatPrice';
+import { CardProduct } from '../CardProduct';
+import { Container, Title } from './styles';
 
-export function OffersCarousrl(){
-    
+export function OffersCarousel() {
 
-    const [categories, setCategories] = useState([]);
+
+    const [offers, setOffers] = useState([]);
 
     useEffect(() => {
-        async function loadCategories() {
-            const { data } = await api.get('/categories');
+        async function loadProducts() {
+
+            const { data } = await api.get('/products');
+
+            const onlyOffers = data
+
+            .filter(product => product.offer)
+            
+            .map (product => ({
+                currencyValue: formatPrice(product.price),
+                 ...product,
+
+            } ) );
 
             try {
-                setCategories(data);
+                setOffers(onlyOffers);
             } catch (error) {
                 console.error('Error fetching categories:', error);
             }
         }
-        loadCategories();
+        loadProducts();
     }, []);
 
     const responsive = {
@@ -40,9 +56,12 @@ export function OffersCarousrl(){
             items: 2
         }
     };
+
+
     return (
         <Container>
-            <Title>Categorias</Title>
+
+            <Title>Ofertas do dia</Title>
 
             <Carousel
                 responsive={responsive}
@@ -50,14 +69,9 @@ export function OffersCarousrl(){
                 partialVisible={false}
                 itemClass='carousel-item' >
 
-                {categories.map(category => (
-                    <ContainerItems key={category.id} imageUrl={category.url}>
-
-                        <p> {category.name}</p>
-
-                    </ContainerItems>
-                )
-                )}
+                {offers.map((product) => (
+                    <CardProduct key={product.id} product={product} />
+                ))}
 
 
 
