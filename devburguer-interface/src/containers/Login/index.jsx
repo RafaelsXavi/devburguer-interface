@@ -17,15 +17,12 @@ import { toast } from "react-toastify";
 
 import { useNavigate } from "react-router-dom";
 
+import { useUser } from "../../hooks/UserContext";
 
 export function Login() {
 
-
-
-
-
-
     const navigate = useNavigate();
+    const {putUserData} = useUser();
 
     const schema = yup.object().shape({
         email: yup.string().email("Digite um e-mail válido").required("Email é obrigatório"),
@@ -43,7 +40,7 @@ export function Login() {
 
     const onSubmit = async (data) => {
         try {
-            const { data: response } = await toast.promise(
+            const {data:userData} = await toast.promise(
                 api.post('/sessions', {
                     email: data.email,
                     password: data.password
@@ -63,11 +60,11 @@ export function Login() {
                 },
             );
 
-            localStorage.setItem('token', response.token)
+          //  localStorage.setItem('token', response.token)
         } catch (error) {
             console.error('Login error:', error);
         }
-
+putUserData (userData);
     };
 
 

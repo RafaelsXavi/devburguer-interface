@@ -5,6 +5,7 @@ display: flex;
 flex-direction: column;
 align-items: center;
 gap: 40px;
+position: relative;
 padding: 20px;
 border-radius: 8px;
 background-color: #ffffff;
