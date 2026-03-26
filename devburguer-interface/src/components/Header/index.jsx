@@ -10,31 +10,37 @@ import {
 
 import { UserCircleIcon, ShoppingCartIcon } from '@phosphor-icons/react';
 
-import {useNavigate, useResolvePath} from 'react-router-dom';
+import { useNavigate, useResolvePath } from 'react-router-dom';
 
-import {} =
-
+import { useUser } from '../../hooks/UserContext';
 
 export function Header() {
 
-const navigate = useNavigate();
 
-const {pathname} = useResolvePath();
+  const navigate = useNavigate();
 
-function logoutUser (){
+  const { pathname } = useResolvePath();
+
+const {logoutUser, userInfo} = useUser();
 
 
-navigate('/login');
-}
+  function logoutUser() {
+    logoutUser();
+    navigate('/login');
+  }
 
   return (
     <Container>
       <Content>
         <Navigation>
           <div>
-            <HeaderLink to="/" $isActive={pathname === '/'}>Home</HeaderLink>
+            <HeaderLink to="/" $isActive={pathname === '/'}>
+              Home
+            </HeaderLink>
             <hr></hr>
-            <HeaderLink to="/cardapio" $isActive={pathname === '/cardapio'}>Cardápio</HeaderLink>
+            <HeaderLink to="/cardapio" $isActive={pathname === '/cardapio'}>
+              Cardápio
+            </HeaderLink>
           </div>
         </Navigation>
         <Options>
@@ -42,14 +48,16 @@ navigate('/login');
             <UserCircleIcon color="#fff" size={24} />
             <div>
               <p>
-                Olá,<span>Rafinha</span>
+                Olá,<span>{userInfo.name}</span>
               </p>
               <Logout onClick={logoutUser}>Sair</Logout>
             </div>
           </Profile>
           <LinkContainer>
             <ShoppingCartIcon color="#fff" size={24} />
-            <HeaderLink>Carrinho</HeaderLink>
+            <HeaderLink to="/carrinho" $isActive={pathname === '/carrinho'}>
+              Carrinho
+            </HeaderLink>
           </LinkContainer>
         </Options>
       </Content>
