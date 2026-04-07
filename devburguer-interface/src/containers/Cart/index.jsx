@@ -1,5 +1,6 @@
-import {logo} from '../../assets';
-import { Container, Banner,Title,Content } from './styles';
+import { Container, Banner, Title, Content } from './styles';
+
+import logo from '../../assets/logo.svg';
 
 
 

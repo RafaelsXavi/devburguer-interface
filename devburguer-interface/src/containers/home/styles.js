@@ -29,7 +29,7 @@ export const Container = styled.section`
 background: linear-gradient(
     rgba(255, 255, 255, 0.8),
     rgba(255, 255, 255, 0.8)
-),
-url('${Background}');
+);
+background: url("${Background}");
 height: auto;
 `;

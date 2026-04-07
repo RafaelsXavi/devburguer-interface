@@ -1,13 +1,7 @@
 import { createBrowserRouter } from 'react-router-dom';
 
+import { Cart, Home, Login,Menu,Register } from '../containers';
 
-
-
-import { Login } from '../containers/Login';
-import { Register } from '../containers/Register';
-import { Home } from '../containers/Home';
-import { Menu } from '../containers/Menu';
-import { Cart } from '../containers/Cart';
 
 export const router = createBrowserRouter([
   {
