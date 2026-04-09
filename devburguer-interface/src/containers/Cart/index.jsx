@@ -1,6 +1,7 @@
 import { Container, Banner, Title, Content } from './styles';
 
 import logo from '../../assets/logo.svg';
+import { CartItems } from '../../components/CartItems';
 
 
 
@@ -20,8 +21,8 @@ export function Cart() {
       <Content>
 
 
-        {/* <CartItems/>
-        <CartResume/> */}
+        <CartItems />
+        {/* <CartResume/> */}
 
       </Content>
 

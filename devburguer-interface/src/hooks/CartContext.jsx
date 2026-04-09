@@ -6,6 +6,7 @@ export const CartProvider = ({ children }) => {
   const [cartProducts, setCartProducts] = useState([]);
 
   const putCartProducts = (product) => {
+
     const cartIndex = cartProducts.findIndex((prd) => prd.id === product.id);
 
     let newProductsIncart = [];
@@ -26,7 +27,7 @@ export const CartProvider = ({ children }) => {
     updateLocalStorage(newProductsIncart);
   };
 
-  
+
 
   const clearCartProducts = () => {
     setCartProducts([]);
@@ -34,11 +35,9 @@ export const CartProvider = ({ children }) => {
   };
 
   const increaseProduct = (productId) => {
-    const updatedCart = cartProducts.map((product) => {
-      if (product.id === productId) {
-        return { ...product, quantity: product.quantity + 1 };
-      }
-      return product;
+    const updatedCart = cartProducts.map((prd) => {
+      return prd.id === productId
+        ? { ...prd, quantity: prd.quantity + 1 } : prd;
     });
     setCartProducts(updatedCart);
     updateLocalStorage(updatedCart);
@@ -56,13 +55,14 @@ export const CartProvider = ({ children }) => {
     const cartIndex = cartProducts.findIndex((prd) => prd.id === productId);
 
     if (cartProducts[cartIndex].quantity > 1) {
-      const updatedCart = cartProducts.map((product) => {
-        if (product.id === productId) {
-          return { ...product, quantity: product.quantity - 1 };
-        }
-        return product;
+      const updatedCart = cartProducts.map((prd) => {
+        return prd.id === productId
+          ? { ...prd, quantity: prd.quantity - 1 } : prd;
 
       });
+      setCartProducts(updatedCart);
+      updateLocalStorage(updatedCart);
+
     } else {
       deleteProduct(productId);
     }
@@ -82,6 +82,7 @@ export const CartProvider = ({ children }) => {
   return (
     <CartContext.Provider
       value={{
+        cartProducts,
         increaseProduct,
         putCartProducts,
         clearCartProducts,

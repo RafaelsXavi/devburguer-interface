@@ -24,7 +24,7 @@ export function Header() {
 const {logoutUser, userInfo} = useUser();
 
 
-  function logoutUser() {
+  function handleLogout() {
     logoutUser();
     navigate('/login');
   }
@@ -50,7 +50,7 @@ const {logoutUser, userInfo} = useUser();
               <p>
                 Olá,<span>{userInfo.name}</span>
               </p>
-              <Logout onClick={logoutUser}>Sair</Logout>
+              <Logout onClick={handleLogout}>Sair</Logout>
             </div>
           </Profile>
           <LinkContainer>
