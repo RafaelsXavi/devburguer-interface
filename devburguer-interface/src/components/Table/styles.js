@@ -3,8 +3,17 @@ import styled from 'styled-components';
 export const Root = styled.table`
 width: 100%;
 border-collapse: collapse;
-background-color: #fff;
+color: #fff;
+background-color: #484848;
 border-radius: 14px;
+&:last-child {
+    
+    border-bottom-right-radius: 14px;
+}
+&:first-child {
+    border-top-left-radius: 14px;
+   
+}
 `
 
 export const Header = styled.thead``
