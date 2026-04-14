@@ -5,7 +5,7 @@ import { useEffect, useState } from 'react';
 import { useCart } from '../../hooks/CartContext';
 import { api } from '../../services/api';
 import { formatPrice } from '../../utils/formatPrice';
-import { useNavigate } from 'react-router-dom';
+import { Navigate, useNavigate } from 'react-router-dom';
 
 export function CartResume() {
   const [finalPrice, setFinalPrice] = useState(0);
@@ -24,32 +24,53 @@ export function CartResume() {
       return {
         id: product.id,
         quantity: product.quantity,
+        price: product.price,
       };
     });
-
     try {
-      const { status } = await api.post(
-        '/orders',
-        { products },
-        {
-          validateStatus: () => true,
-        },
-      );
-      if (status === 200 || status === 201) {
-        setTimeout(() => {
-          
-          navigate('/');
-        }, 2000);
-        clearCart();
-        toast.success('Pedido realizado com sucesso!');
-      } else if (status === 409) {
-        toast.error('Não foi possível realizar o pedido. Tente novamente.');
-      } else {
-        throw new Error('Unexpected error');
-      }
-    } catch (error) {
-      toast.error('Ocorreu um erro inesperado. Tente novamente mais tarde.');
+
+      const { data } = await api.post('/create-payment-intent', { products });
+
+      navigate('/checkout', {
+        state: data,
+      })
+    } catch (err) {
+      toast.error('Ocorreu um erro inesperado. Tente novamente mais tarde.', {
+        position: "top-right",
+        autoClose: 2000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+      });
+
+
     }
+    // try {
+    //   const { status } = await api.post(
+    //     '/orders',
+    //     { products },
+    //     {
+    //       validateStatus: () => true,
+    //     },
+    //   );
+    //   if (status === 200 || status === 201) {
+    //     setTimeout(() => {
+
+    //       navigate('/');
+    //     }, 2000);
+    //     clearCart();
+    //     toast.success('Pedido realizado com sucesso!');
+    //   } else if (status === 409) {
+    //     toast.error('Não foi possível realizar o pedido. Tente novamente.');
+    //   } else {
+    //     throw new Error('Unexpected error');
+    //   }
+    // } catch (error) {
+    //   toast.error('Ocorreu um erro inesperado. Tente novamente mais tarde.');
+    // }
   };
 
   return (

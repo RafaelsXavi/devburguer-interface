@@ -78,7 +78,7 @@ p{
 }
 `;
 
-export const logout = styled.button`
+export const Logout = styled.button`
 color: #ff3205;
 text-decoration: none;
 font-weight: 700;

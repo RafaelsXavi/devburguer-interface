@@ -6,11 +6,12 @@ import {
   Options,
   Profile,
   Content,
+  Logout
 } from './styles';
 
 import { UserCircleIcon, ShoppingCartIcon } from '@phosphor-icons/react';
 
-import { useNavigate, useResolvePath } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 
 import { useUser } from '../../hooks/UserContext';
 
@@ -19,13 +20,13 @@ export function Header() {
 
   const navigate = useNavigate();
 
-  const { pathname } = useResolvePath();
+  const { pathname } = useLocation();
 
-const {logoutUser, userInfo} = useUser();
+const {logout, userInfo} = useUser();
 
 
   function handleLogout() {
-    logoutUser();
+    logout();
     navigate('/login');
   }
 
