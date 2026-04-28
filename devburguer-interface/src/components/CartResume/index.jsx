@@ -28,49 +28,23 @@ export function CartResume() {
       };
     });
     try {
-
       const { data } = await api.post('/create-payment-intent', { products });
 
       navigate('/checkout', {
         state: data,
-      })
+      });
     } catch (err) {
       toast.error('Ocorreu um erro inesperado. Tente novamente mais tarde.', {
-        position: "top-right",
+        position: 'top-right',
         autoClose: 2000,
         hideProgressBar: false,
         closeOnClick: true,
         pauseOnHover: true,
         draggable: true,
         progress: undefined,
-        theme: "dark",
+        theme: 'dark',
       });
-
-
     }
-    // try {
-    //   const { status } = await api.post(
-    //     '/orders',
-    //     { products },
-    //     {
-    //       validateStatus: () => true,
-    //     },
-    //   );
-    //   if (status === 200 || status === 201) {
-    //     setTimeout(() => {
-
-    //       navigate('/');
-    //     }, 2000);
-    //     clearCart();
-    //     toast.success('Pedido realizado com sucesso!');
-    //   } else if (status === 409) {
-    //     toast.error('Não foi possível realizar o pedido. Tente novamente.');
-    //   } else {
-    //     throw new Error('Unexpected error');
-    //   }
-    // } catch (error) {
-    //   toast.error('Ocorreu um erro inesperado. Tente novamente mais tarde.');
-    // }
   };
 
   return (
